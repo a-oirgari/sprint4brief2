@@ -40,6 +40,3 @@ INSERT INTO prescriptions (date, doctor_id, patient_id, medication_id, dosage_in
 ('2025-01-18', 4, 4, 1, '500mg if pain persists'),
 ('2025-01-20', 5, 5, 5, '2 puffs when needed');
 
-INSERT INTO users (email, password, role, first_name, last_name) 
-VALUES ('admin@clinic.com', '$2y$10$kzkV6D6CGNCHsOV8nKvbn.Q0X1hY9z/53NG5yqWJtA12H/1GC8N/m', 'admin', 'Admin', 'System');
--- Note: Pour le mot de passe, utiliser password_hash('votremotdepasse', PASSWORD_DEFAULT)

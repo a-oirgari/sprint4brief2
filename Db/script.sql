@@ -1,4 +1,3 @@
--- Active: 1764689340628@@127.0.0.1@3306@hospital_db
 CREATE DATABASE hospital_db;
 USE hospital_db;
 CREATE TABLE users (
@@ -88,7 +87,3 @@ CREATE TABLE prescriptions (
 );
 
 
--- ============================================================
-DELETE FROM users;
-INSERT INTO users (email, password, role, first_name, last_name) 
-VALUES ('admin@clinic.com', 'admin1234', 'admin', 'Admin', 'System');

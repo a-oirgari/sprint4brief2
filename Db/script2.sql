@@ -1,3 +1,9 @@
+INSERT INTO users (email, password, role, first_name, last_name) VALUES
+('admin@clinic.com', 'admin1234', 'admin', 'Admin', 'System'),
+('dr.smith@clinic.com', 'doctor123', 'doctor', 'John', 'Smith'),
+('dr.jones@clinic.com', 'doctor123', 'doctor', 'Sarah', 'Jones'),
+('patient1@email.com', 'patient123', 'patient', 'Mohammed', 'Alami'),
+('patient2@email.com', 'patient123', 'patient', 'Fatima', 'Zahra');
 INSERT INTO departments (name, location) VALUES
 ('Cardiology', 'Building A - Floor 2'),
 ('Neurology', 'Building B - Floor 3'),

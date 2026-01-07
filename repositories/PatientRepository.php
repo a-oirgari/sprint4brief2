@@ -1,11 +1,8 @@
 <?php
-// repositories/PatientRepository.php
+
 require_once 'BaseRepository.php';
 
 class PatientRepository extends BaseRepository {
-    /**
-     * Retrouver un patient par identifiant
-     */
     public function findById(int $id): ?array {
         $stmt = $this->db->prepare("SELECT * FROM patients WHERE id = ? LIMIT 1");
         $stmt->execute([$id]);
@@ -13,9 +10,6 @@ class PatientRepository extends BaseRepository {
         return $result ?: null;
     }
 
-    /**
-     * Retrouver un patient via son email
-     */
     public function findByEmail(string $email): ?array {
         $stmt = $this->db->prepare("SELECT * FROM patients WHERE email = ? LIMIT 1");
         $stmt->execute([$email]);
@@ -23,16 +17,12 @@ class PatientRepository extends BaseRepository {
         return $result ?: null;
     }
 
-    /**
-     * S'assure qu'un patient existe pour l'utilisateur courant et retourne son ID
-     */
     public function ensureFromUser(array $user): int {
         $existing = $this->findByEmail($user['email']);
         if ($existing) {
             return (int) $existing['id'];
         }
 
-        // Utilise les infos du compte pour remplir le minimum requis
         $firstName = $user['first_name'] ?? 'Inconnu';
         $lastName = $user['last_name'] ?? 'Inconnu';
 
@@ -45,9 +35,6 @@ class PatientRepository extends BaseRepository {
         return (int) $this->db->lastInsertId();
     }
 
-    /**
-     * Récupérer tous les patients (pour que le médecin choisisse un patient)
-     */
     public function getAll(): array {
         $sql = "SELECT * FROM patients ORDER BY last_name, first_name";
         return $this->db->query($sql)->fetchAll(PDO::FETCH_ASSOC);

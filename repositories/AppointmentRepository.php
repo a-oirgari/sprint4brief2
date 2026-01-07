@@ -1,12 +1,9 @@
 <?php
-// repositories/AppointmentRepository.php
+
 require_once 'BaseRepository.php';
 
 class AppointmentRepository extends BaseRepository {
 
-    /**
-     * Créer un nouveau rendez-vous
-     */
     public function create(array $data): int {
         $sql = "INSERT INTO appointments
                 (date, time, doctor_id, patient_id, reason, status)
@@ -22,9 +19,7 @@ class AppointmentRepository extends BaseRepository {
         return (int) $this->db->lastInsertId();
     }
 
-    /**
-     * Récupérer tous les rendez-vous avec détails (pour admin)
-     */
+    
     public function getAll(): array {
         $sql = "SELECT 
                 a.*,
@@ -40,9 +35,7 @@ class AppointmentRepository extends BaseRepository {
         return $this->db->query($sql)->fetchAll(PDO::FETCH_ASSOC);
     }
 
-    /**
-     * Récupérer les rendez-vous d'un utilisateur (patient ou médecin)
-     */
+    
     public function getByUser(int $userId): array {
         $stmt = $this->db->prepare(
             "SELECT 
@@ -62,9 +55,7 @@ class AppointmentRepository extends BaseRepository {
         return $stmt->fetchAll(PDO::FETCH_ASSOC);
     }
 
-    /**
-     * Récupérer un rendez-vous par ID
-     */
+    
     public function getById(int $id): ?array {
         $stmt = $this->db->prepare(
             "SELECT 
@@ -83,9 +74,7 @@ class AppointmentRepository extends BaseRepository {
         return $result ?: null;
     }
 
-    /**
-     * Mettre à jour le statut d'un rendez-vous
-     */
+    
     public function updateStatus(int $id, string $status): bool {
         $stmt = $this->db->prepare(
             "UPDATE appointments SET status = ? WHERE id = ?"
@@ -93,9 +82,7 @@ class AppointmentRepository extends BaseRepository {
         return $stmt->execute([$status, $id]);
     }
 
-    /**
-     * Supprimer un rendez-vous
-     */
+    
     public function delete(int $id): bool {
         $stmt = $this->db->prepare("DELETE FROM appointments WHERE id = ?");
         return $stmt->execute([$id]);

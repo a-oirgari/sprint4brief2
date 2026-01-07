@@ -1,12 +1,9 @@
 <?php
-// repositories/PrescriptionRepository.php
 require_once 'BaseRepository.php';
 
 class PrescriptionRepository extends BaseRepository {
 
-    /**
-     * Récupérer les prescriptions d'un médecin avec détails
-     */
+    
     public function getByDoctor(int $doctorId): array {
         $stmt = $this->db->prepare(
             "SELECT 
@@ -25,9 +22,6 @@ class PrescriptionRepository extends BaseRepository {
         return $stmt->fetchAll(PDO::FETCH_ASSOC);
     }
 
-    /**
-     * Récupérer les prescriptions d'un patient avec détails
-     */
     public function getByPatient(int $patientId): array {
         $stmt = $this->db->prepare(
             "SELECT 
@@ -47,9 +41,6 @@ class PrescriptionRepository extends BaseRepository {
         return $stmt->fetchAll(PDO::FETCH_ASSOC);
     }
 
-    /**
-     * Récupérer toutes les prescriptions (admin)
-     */
     public function getAll(): array {
         $sql = "SELECT 
                 p.*, 
@@ -66,9 +57,6 @@ class PrescriptionRepository extends BaseRepository {
         return $this->db->query($sql)->fetchAll(PDO::FETCH_ASSOC);
     }
 
-    /**
-     * Créer une nouvelle prescription
-     */
     public function create(array $data): int {
         $sql = "INSERT INTO prescriptions 
                 (date, doctor_id, patient_id, medication_id, dosage_instructions) 
@@ -84,9 +72,6 @@ class PrescriptionRepository extends BaseRepository {
         return (int) $this->db->lastInsertId();
     }
 
-    /**
-     * Supprimer une prescription
-     */
     public function delete(int $id): bool {
         $stmt = $this->db->prepare("DELETE FROM prescriptions WHERE id = ?");
         return $stmt->execute([$id]);

@@ -5,7 +5,7 @@ abstract class User {
     protected string $password;
     protected string $role;
 
-    
+   
     public function getId(): int {
         return $this->id;
     }
